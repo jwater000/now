@@ -5,9 +5,9 @@ import { useEffect, useState } from 'react'
 import { useAuthStore } from '@/store/auth'
 import { initializeKakao } from '@/lib/kakao'
 
-interface KakaoAuthObj {
-  access_token: string
-  // 필요한 다른 속성들 추가
+interface KakaoAuthResponse {
+  access_token: string;
+  // 필요한 다른 필드들
 }
 
 interface KakaoError {
@@ -27,7 +27,8 @@ export default function KakaoLogin() {
   const handleKakaoLogin = () => {
     if (window.Kakao && isLoaded) {
       window.Kakao.Auth.login({
-        success: (authObj: KakaoAuthObj) => {
+        success: (authObj: KakaoAuthResponse) => {
+          console.log('Auth success:', authObj)
           window.Kakao.API.request({
             url: '/v2/user/me',
             success: (res: any) => {

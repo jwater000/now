@@ -35,6 +35,7 @@ export default function BoardDetailPage({ params }: { params: { id: string } }) 
           setError(response.error || '게시글을 불러오는데 실패했습니다.')
         }
       } catch (err) {
+        console.error('Page error:', err)
         setError('게시글을 불러오는데 실패했습니다.')
       } finally {
         setIsLoading(false)

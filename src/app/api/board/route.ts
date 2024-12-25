@@ -2,19 +2,7 @@ import { NextResponse } from 'next/server'
 import type { Post } from '@/types/board'
 
 // 임시 데이터 저장소
-export let posts: Post[] = [
-  {
-    id: '1',
-    type: 'program-review',
-    title: '마음챙김 명상 프로그램 참여 후기입니다',
-    content: '프로그램에 참여하면서 느낀 점과 경험을 공유합니다...',
-    authorId: 'user1',
-    authorName: '김철수',
-    createdAt: '2024-01-20',
-    relatedItem: 'mindful-meditation',
-    verificationStatus: true
-  }
-]
+const posts = [] as Post[]
 
 // 게시글 목록 조회
 export async function GET(request: Request) {
@@ -59,7 +47,7 @@ export async function POST(request: Request) {
       data: newPost
     })
   } catch (error) {
-    console.error('Error creating post:', error)
+    console.error('API error:', error)
     return NextResponse.json(
       { success: false, error: '게시글 작성에 실패했습니다.' },
       { status: 500 }

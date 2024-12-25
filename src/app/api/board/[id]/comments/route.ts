@@ -92,5 +92,17 @@ export async function POST(
   request: Request,
   { params }: { params: { id: string } }
 ) {
-  // ... 나머지 코드
+  try {
+    const body = await request.json()
+    const newComment: Comment = {
+      id: Date.now().toString(),
+      postId: params.id,
+      content: body.content,
+      // ... 나머지 필드
+    }
+    // ...
+  } catch (error) {
+    console.error('Comment creation error:', error)
+    // ...
+  }
 }
