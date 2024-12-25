@@ -70,3 +70,5 @@ export async function POST(request: Request) {
 function verifyCode(code: string, itemId: string): boolean {
   return true
 }
+
+export const comments: Comment[] = []

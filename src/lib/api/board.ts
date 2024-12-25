@@ -29,12 +29,11 @@ export async function createPost(postData: Omit<Post, 'id' | 'createdAt'>): Prom
   return data
 }
 
-// src/lib/api/board.ts의 createComment 함수 수정
 export async function createComment(
-  postId: string,
+  id: string,
   data: { content: string; authorId: string; authorName: string }
 ): Promise<ApiResponse<Comment>> {
-  const response = await fetch(`/api/board/${postId}/comments`, {
+  const response = await fetch(`/api/board/${id}/comments`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

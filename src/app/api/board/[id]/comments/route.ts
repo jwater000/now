@@ -1,12 +1,12 @@
-// src/app/api/board/[postId]/comments/[commentId]/route.ts
+// src/app/api/board/[id]/comments/[commentId]/route.ts
 import { NextResponse } from 'next/server'
 import type { Comment } from '@/types/board'
-import { comments } from '../../route'  // 임시 데이터 저장소
+import { comments } from '@/app/api/board/route'  // 임시 데이터 저장소
 
 // 댓글 수정
 export async function PUT(
   request: Request,
-  { params }: { params: { postId: string; commentId: string } }
+  { params }: { params: { id: string; commentId: string } }
 ) {
   try {
     const body = await request.json()
@@ -50,7 +50,7 @@ export async function PUT(
 // 댓글 삭제
 export async function DELETE(
   request: Request,
-  { params }: { params: { postId: string; commentId: string } }
+  { params }: { params: { id: string; commentId: string } }
 ) {
   try {
     const commentIndex = comments.findIndex(c => c.id === params.commentId)
@@ -84,4 +84,11 @@ export async function DELETE(
       { status: 500 }
     )
   }
+}
+
+export async function POST(
+  request: Request,
+  { params }: { params: { id: string } }
+) {
+  // ... 나머지 코드
 }
