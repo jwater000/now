@@ -63,19 +63,30 @@ export default function WritePage() {
         return
       }
 
-      const response = await createPost({
-        ...formData,
-        authorId: user.id,
-        authorName: user.nickname
-      })
+      try {
+        const response = await createPost({
+          title: formData.title,
+          content: formData.content,
+          type: formData.category, // category 대신 type 사용
+          authorId: user.id,
+          authorName: user.nickname,
+          createdAt: new Date().toISOString()
+        })
 
-      if (response.success) {
-        router.push('/board')
-      } else {
-        setError(response.error || '게시글 작성에 실패했습니다.')
+        if (response.success) {
+          router.push('/board')
+        } else {
+          setError(response.error || '게시글 작성에 실패했습니다.')
+        }
+      } catch (err) {
+        console.error('Error creating post:', err)
+        alert('게시글 작성에 실패했습니다.')
+      } finally {
+        setIsSubmitting(false)
       }
     } catch (err) {
-      setError('게시글 작성에 실패했습니다.')
+      console.error('Error creating post:', err)
+      alert('게시글 작성에 실패했습니다.')
     } finally {
       setIsSubmitting(false)
     }

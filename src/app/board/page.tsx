@@ -36,7 +36,8 @@ export default function BoardPage() {
           setError(response.error || '게시글을 불러오는데 실패했습니다.')
         }
       } catch (err) {
-        setError('게시글을 불러오는데 실패했습니다.')
+        console.error('Error fetching posts:', err)
+        setError('게시글 목록을 불러오는데 실패했습니다.')
       } finally {
         setIsLoading(false)
       }

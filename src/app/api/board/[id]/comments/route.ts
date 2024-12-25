@@ -40,6 +40,7 @@ export async function PUT(
       data: comments[commentIndex]
     })
   } catch (error) {
+    console.error('Error updating comment:', error)
     return NextResponse.json(
       { success: false, error: '댓글 수정에 실패했습니다.' },
       { status: 500 }
@@ -78,7 +79,8 @@ export async function DELETE(
     comments.splice(commentIndex, 1)
 
     return NextResponse.json({ success: true })
-  } catch (error) {
+  } catch (error: unknown) {
+    console.error('Error deleting comment:', error)
     return NextResponse.json(
       { success: false, error: '댓글 삭제에 실패했습니다.' },
       { status: 500 }

@@ -59,6 +59,7 @@ export async function POST(request: Request) {
       data: newPost
     })
   } catch (error) {
+    console.error('Error creating post:', error)
     return NextResponse.json(
       { success: false, error: '게시글 작성에 실패했습니다.' },
       { status: 500 }

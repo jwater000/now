@@ -5,6 +5,16 @@ import { useEffect, useState } from 'react'
 import { useAuthStore } from '@/store/auth'
 import { initializeKakao } from '@/lib/kakao'
 
+interface KakaoAuthObj {
+  access_token: string
+  // 필요한 다른 속성들 추가
+}
+
+interface KakaoError {
+  error: string
+  // 필요한 다른 속성들 추가
+}
+
 export default function KakaoLogin() {
   const { setUser } = useAuthStore()
   const [isLoaded, setIsLoaded] = useState(false)
@@ -17,7 +27,7 @@ export default function KakaoLogin() {
   const handleKakaoLogin = () => {
     if (window.Kakao && isLoaded) {
       window.Kakao.Auth.login({
-        success: (authObj: any) => {
+        success: (authObj: KakaoAuthObj) => {
           window.Kakao.API.request({
             url: '/v2/user/me',
             success: (res: any) => {
@@ -30,12 +40,12 @@ export default function KakaoLogin() {
                 kakaoId: res.id.toString(),
               });
             },
-            fail: (error: any) => {
+            fail: (error: KakaoError) => {
               console.error('카카오 프로필 정보 요청 실패', error);
             },
           });
         },
-        fail: (error: any) => {
+        fail: (error: KakaoError) => {
           console.error('카카오 로그인 실패', error);
         },
       });
