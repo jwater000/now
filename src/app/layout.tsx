@@ -24,8 +24,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
+      <head>
+        <Script
+          src="https://t1.kakaocdn.net/kakao_js_sdk/2.6.0/kakao.min.js"
+          integrity="sha384-6MFdIr0zOira1DhwGGYZxzdRRMQORrTyTnpGBmWEks1RMserGcHEfHXpxHgzqMD"
+          crossOrigin="anonymous"
+          strategy="beforeInteractive"
+        />
+      </head>
       <body className={notoSerifKr.className}>
-        <Script src="https://developers.kakao.com/sdk/js/kakao.js" /> {/* body 내부로 이동 */}
         <Header />
         <main className="min-h-screen pt-16 md:pt-20">
           {children}
