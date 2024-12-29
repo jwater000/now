@@ -7,7 +7,7 @@ interface User {
   nickname: string;
   email?: string;
   profileImage?: string;
-  kakaoId: string;
+  kakaoId?: string; // 옵셔널로 변경
 }
 
 interface AuthState {
@@ -23,7 +23,12 @@ export const useAuthStore = create<AuthState>()(
       user: null,
       isAuthenticated: false,
       setUser: (user) => set({ user, isAuthenticated: !!user }),
-      logout: () => set({ user: null, isAuthenticated: false }),
+      logout: () => {
+        if (window.Kakao?.Auth?.getAccessToken()) {
+          window.Kakao.Auth.logout();
+        }
+        set({ user: null, isAuthenticated: false });
+      },
     }),
     {
       name: 'auth-storage',

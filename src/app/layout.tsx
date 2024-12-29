@@ -1,6 +1,7 @@
 // src/app/layout.tsx
 import type { Metadata } from 'next'
 import { Noto_Serif_KR } from 'next/font/google'
+import Script from 'next/script'  // Script import 추가
 import Header from '@/components/common/Header'
 import Footer from '@/components/common/Footer'
 import './globals.css'
@@ -24,6 +25,7 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={notoSerifKr.className}>
+        <Script src="https://developers.kakao.com/sdk/js/kakao.js" /> {/* body 내부로 이동 */}
         <Header />
         <main className="min-h-screen pt-16 md:pt-20">
           {children}
