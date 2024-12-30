@@ -20,6 +20,15 @@ export default function KakaoLogin() {
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
+    console.log('KAKAO_JS_KEY:', process.env.NEXT_PUBLIC_KAKAO_JS_KEY)
+    
+    if (!Kakao.isInitialized()) {
+      Kakao.init(process.env.NEXT_PUBLIC_KAKAO_JS_KEY)
+    }
+    console.log('Kakao is initialized:', Kakao.isInitialized())
+  }, [])
+
+  useEffect(() => {
     try {
       initializeKakao();
       setIsLoaded(true);
